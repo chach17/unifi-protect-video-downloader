@@ -4,6 +4,7 @@ RUN mkdir /build
 WORKDIR /build
 
 COPY . /build/
+COPY pyproject.toml /build/
 
 RUN poetry build -f wheel --no-ansi --no-interaction
 
