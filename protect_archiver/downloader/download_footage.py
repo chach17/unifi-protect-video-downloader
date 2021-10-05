@@ -15,13 +15,6 @@ def download_footage(client, start: datetime, end: datetime, camera: Camera):
 
 	logging.info(f"Downloading footage for camera '{camera.name}' ({camera.id})")
 
-	# split requested time frame into chunks of 1 hour or less and download them one by one
-	# for interval_start, interval_end in calculate_intervals(start, end):
-	# wait n seconds before starting next download (if parameter is set)
-	# if client.download_wait != 0 and client.files_downloaded == 0:
-	# logging.debug(f"Command line argument '--wait-between-downloads' is set to {client.download_wait} second(s)... \n")
-	# time.sleep(int(client.download_wait))
-
 	# start and end time of the video segment to be downloaded
 	js_timestamp_range_start = int(start.timestamp()) * 1000
 	js_timestamp_range_end = int(end.timestamp()) * 1000
@@ -48,8 +41,8 @@ def download_footage(client, start: datetime, end: datetime, camera: Camera):
 		download_dir = client.destination_path
 
 	# file name for download
-	filename_timestamp = start.strftime("%Y-%m-%d - %H.%M.%S%z")
-	filename = f"{download_dir}/{camera_name_fs_safe} - {filename_timestamp}.mp4"
+	filename_timestamp = start.strftime("%Y-%m-%d_%H.%M.%S%z")
+	filename = f"{download_dir}/{camera_name_fs_safe}_{filename_timestamp}.mp4"
 
 	logging.info(
 		f"Downloading video for time range {start} - {end} to {filename}"
