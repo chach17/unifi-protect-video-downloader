@@ -87,7 +87,7 @@ def make_camera_name_fs_safe(camera: Camera) -> str:
     return (
         "".join(
             [c for c in camera.name if c.isalpha() or c.isdigit() or c == " "]
-        ).rstrip()
+        ).rstrip().replace(" ", "-")
         + f" ({str(camera.id)[-4:]})".replace(" ", "-")
     )
 
